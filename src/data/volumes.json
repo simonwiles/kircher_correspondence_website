@@ -1,0 +1,100 @@
+[
+  {
+    "volume_id": 1,
+    "volume_number": "Volume I (APUG 555)",
+    "volume_extent": "168 items, 584 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/yv987zb1587%2FAPUG555_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:hw584xr5161/v3.0_IIIF_volume_1.json"
+  },
+  {
+    "volume_id": 2,
+    "volume_number": "Volume II (APUG 556)",
+    "volume_extent": "169 items, 644 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/wj317ct0136%2FAPUG556_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:tp110ry2753/v3.0_IIIF_volume_2.json"
+  },
+  {
+    "volume_id": 3,
+    "volume_number": "Volume III (APUG 557)",
+    "volume_extent": "313 items, 873 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/xh890gs5439%2FAPUG557_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:tk967bz8344/v3.0_IIIF_volume_3.json"
+  },
+  {
+    "volume_id": 4,
+    "volume_number": "Volume IV (APUG 558)",
+    "volume_extent": "128 items, 318 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/pk220jb7457%2FAPUG558_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:sp556dz6043/v3.0_IIIF_volume_4.json"
+  },
+  {
+    "volume_id": 5,
+    "volume_number": "Volume V (APUG 559)",
+    "volume_extent": "112 items, 408 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/dq526gg9681%2FAPUG559_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:mf756qw2503/v3.0_IIIF_volume_5.json"
+  },
+  {
+    "volume_id": 6,
+    "volume_number": "Volume VI (APUG 560)",
+    "volume_extent": "120 items, 377 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/hs667gq1778%2FAPUG560_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:jd442nb5127/v3.0_IIIF_volume_6.json"
+  },
+  {
+    "volume_id": 7,
+    "volume_number": "Volume VII (APUG 561)",
+    "volume_extent": "252 items, 570 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/cj324fq2384%2FAPUG561_002r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:ck453gg6300/v3.0_IIIF_volume_7.json"
+  },
+  {
+    "volume_id": 8,
+    "volume_number": "Volume VIII (APUG 562)",
+    "volume_extent": "119 items, 347 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/bv731gh4584%2FAPUG562_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:cv729cr7116/v3.0_IIIF_volume_8.json"
+  },
+  {
+    "volume_id": 9,
+    "volume_number": "Volume IX (APUG 563)",
+    "volume_extent": "198 items, 623 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/gs118md4726%2FAPUG563_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:gk730ck4833/v3.0_IIIF_volume_9.json"
+  },
+  {
+    "volume_id": 10,
+    "volume_number": "Volume X (APUG 564)",
+    "volume_extent": "137 items, 367 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/ds554mr6829%2FAPUG564_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:df542nq9999/v3.0_IIIF_volume_10.json"
+  },
+  {
+    "volume_id": 11,
+    "volume_number": "Volume XI (APUG 565)",
+    "volume_extent": "215 items, 765 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/rm399gj9526%2FAPUG565_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:mn199gk7353/v3.0_IIIF_volume_11.json"
+  },
+  {
+    "volume_id": 12,
+    "volume_number": "Volume XII (APUG 566)",
+    "volume_extent": "165 items, 498 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/dy487hc3410%2FAPUG566_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:wp735cy4786/v3.0_IIIF_volume_12.json"
+  },
+  {
+    "volume_id": 13,
+    "volume_number": "Volume XIII (APUG 567)",
+    "volume_extent": "248 items, 588 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/wz413bv2362%2FAPUG567_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:cp058gy2845/v3.0_IIIF_volume_13.json"
+  },
+  {
+    "volume_id": 14,
+    "volume_number": "Volume XIV (APUG 568)",
+    "volume_extent": "220 items, 674 images",
+    "volume_preview": "https://stacks.stanford.edu/image/iiif/jz904kr8563%2FAPUG568_001r/full/full/0/default.jpg",
+    "volume_manifest": "https://stacks.stanford.edu/file/druid:jf893tc9471/v3.0_IIIF_volume_14.json"
+  }
+]
