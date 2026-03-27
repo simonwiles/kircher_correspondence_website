@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { searchItems, loadVolumeById, loadItemByCanvas } from './data-api';
 import './KircherBrowse.css';
 
 export default function KircherSearch() {
@@ -16,7 +17,6 @@ export default function KircherSearch() {
   const [currentPage, setCurrentPage] = useState(1);
   const [loadingPage, setLoadingPage] = useState(false);
   
-  const API_URL = '';
   const RESULTS_PER_PAGE = 5000;
 
   const totalPages = Math.ceil(totalResults / RESULTS_PER_PAGE);
@@ -37,46 +37,18 @@ export default function KircherSearch() {
       
       const offset = (pageNum - 1) * RESULTS_PER_PAGE;
       
-      const params = new URLSearchParams();
-      if (searchQuery.trim()) params.append('q', searchQuery.trim());
-      if (searchFilters.language) params.append('language', searchFilters.language);
-      params.append('limit', RESULTS_PER_PAGE);
-      params.append('offset', offset);
+      const { results: searchResults, total } = searchItems(searchQuery.trim(), {
+        language: searchFilters.language || undefined,
+        limit: RESULTS_PER_PAGE,
+        offset: offset
+      });
       
-      const url = `${API_URL}/api/search?${params.toString()}`;
-      console.log('Fetching page:', pageNum, 'with offset:', offset, 'URL:', url);
+      console.log('Search results:', searchResults.length, 'of', total);
       
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-        throw new Error('Search failed');
-      }
-      
-      const data = await response.json();
-      console.log('Received data for page', pageNum, ':', data.length, 'results');
-      console.log('First result ID:', data[0]?.title_id, 'Last result ID:', data[data.length-1]?.title_id);
-      
-      if (Array.isArray(data)) {
-        setResults(data);
-        setCurrentPage(pageNum);
-        setHasMore(data.length === RESULTS_PER_PAGE);
-        
-        if (pageNum === 1) {
-          if (data.length === RESULTS_PER_PAGE) {
-            setTotalResults(RESULTS_PER_PAGE * 10);
-          } else {
-            setTotalResults(data.length);
-          }
-        }
-        else if (data.length < RESULTS_PER_PAGE) {
-          setTotalResults(offset + data.length);
-        }
-      } else {
-        setResults([]);
-        setHasMore(false);
-        setTotalResults(0);
-        setCurrentPage(1);
-      }
+      setResults(searchResults);
+      setCurrentPage(pageNum);
+      setTotalResults(total);
+      setHasMore(offset + searchResults.length < total);
     } catch (err) {
       setError(err.message);
       console.error('Search error:', err);
@@ -191,7 +163,7 @@ export default function KircherSearch() {
 
           <div style={{ display: 'flex', gap: '1rem' }}>
             <button
-              onClick={handleSearch}
+              onClick={() => handleSearch()}
               disabled={loading}
               style={{ flex: 1, padding: '0.75rem 1.5rem', fontSize: '1rem', fontWeight: '600', color: 'white', backgroundColor: loading ? '#9ca3af' : '#2563eb', border: 'none', borderRadius: '0.5rem', cursor: loading ? 'not-allowed' : 'pointer' }}
             >
@@ -491,19 +463,15 @@ function ItemViewer({ item, onBack }) {
   const [loadingItem, setLoadingItem] = useState(false);
   const miradorRef = useRef(null);
   const miradorInstanceRef = useRef(null);
-  
-  const API_URL = '';
 
   useEffect(() => {
-    const fetchVolume = async () => {
+    const fetchVolume = () => {
       try {
         setLoadingVolume(true);
-        const response = await fetch(`${API_URL}/api/volumes/${item.volume_id}`);
-        if (!response.ok) throw new Error('Failed to fetch volume');
-        const data = await response.json();
+        const data = loadVolumeById(item.volume_id);
         setVolumeData(data);
       } catch (err) {
-        console.error('Error fetching volume:', err);
+        console.error('Error loading volume:', err);
       } finally {
         setLoadingVolume(false);
       }
@@ -674,15 +642,7 @@ function ItemViewer({ item, onBack }) {
     try {
       setLoadingItem(true);
       
-      const response = await fetch(`${API_URL}/api/items/by-canvas?canvas=${encodeURIComponent(canvasUrl)}`);
-      
-      if (!response.ok) {
-        console.log('No response for canvas, keeping previous metadata');
-        setLoadingItem(false);
-        return previousTitleId;
-      }
-      
-      const data = await response.json();
+      const data = loadItemByCanvas(canvasUrl);
       
       if (!data || !data.title_id) {
         console.log('No metadata for this canvas, keeping previous metadata');
@@ -701,7 +661,7 @@ function ItemViewer({ item, onBack }) {
         return previousTitleId;
       }
     } catch (err) {
-      console.error('Error fetching item data:', err);
+      console.error('Error loading item data:', err);
       setLoadingItem(false);
       return previousTitleId;
     }

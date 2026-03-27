@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Search from './Search';
 import Main from './Main';
 import About from './About';
+import { loadVolumes, loadItemByCanvas } from './data-api';
 import './KircherBrowse.css';
 
 export default function KircherBrowse() {
@@ -10,8 +11,6 @@ export default function KircherBrowse() {
   const [error, setError] = useState(null);
   const [selectedVolume, setSelectedVolume] = useState(null);
   const [currentPage, setCurrentPage] = useState('main');
-  
-  const API_URL = '';
 
   useEffect(() => {
     if (currentPage === 'browse') {
@@ -19,23 +18,15 @@ export default function KircherBrowse() {
     }
   }, [currentPage]);
 
-  const fetchVolumes = async () => {
+  const fetchVolumes = () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_URL}/api/volumes`);
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch volumes');
-      }
-      
-      const data = await response.json();
-      console.log('API Response:', data);
-      console.log('First volume:', data[0]);
+      const data = loadVolumes();
       setVolumes(data);
       setError(null);
     } catch (err) {
       setError(err.message);
-      console.error('Error fetching volumes:', err);
+      console.error('Error loading volumes:', err);
     } finally {
       setLoading(false);
     }
@@ -137,7 +128,7 @@ export default function KircherBrowse() {
               <h2 className="error-title">Connection Error</h2>
               <p className="error-message">{error}</p>
               <p className="error-help">
-                Make sure your API server is running and the API_URL is correct.
+                Unable to load volume data. Please check that the data files are available.
               </p>
               <button onClick={fetchVolumes} className="retry-button">
                 Try Again
@@ -479,7 +470,6 @@ function VolumeViewer({ volume, onBack, currentPage, onNavigate }) {
   const miradorInstanceRef = useRef(null);
   
   const manifestUrl = volume.volume_manifest;
-  const API_URL = '';
   
   console.log('Volume data:', volume);
   console.log('Manifest URL:', manifestUrl);
@@ -640,15 +630,7 @@ function VolumeViewer({ volume, onBack, currentPage, onNavigate }) {
       setLoadingItem(true);
       setItemError(null);
       
-      const response = await fetch(`${API_URL}/api/items/by-canvas?canvas=${encodeURIComponent(canvasUrl)}`);
-      
-      if (!response.ok) {
-        console.log('No response for canvas, keeping previous metadata');
-        setLoadingItem(false);
-        return previousTitleId;
-      }
-      
-      const data = await response.json();
+      const data = loadItemByCanvas(canvasUrl);
       
       if (!data || !data.title_id) {
         console.log('No metadata for this canvas, keeping previous metadata');
@@ -667,7 +649,7 @@ function VolumeViewer({ volume, onBack, currentPage, onNavigate }) {
         return previousTitleId;
       }
     } catch (err) {
-      console.error('Error fetching item data:', err);
+      console.error('Error loading item data:', err);
       setItemError(null);
       setLoadingItem(false);
       return previousTitleId;
